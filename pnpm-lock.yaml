@@ -48,6 +48,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.19
         version: 10.4.19(postcss@8.4.38)
+      axios:
+        specifier: ^1.7.2
+        version: 1.7.2(debug@4.3.5)
       cypress:
         specifier: ^13.12.0
         version: 13.12.0
