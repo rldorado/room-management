@@ -17,14 +17,36 @@ defineProps({
   }
 })
 
-const emit = defineEmits(['add', 'edit'])
+const emit = defineEmits(['add', 'edit', 'delete'])
 
+/**
+ * Emits an 'add' event with the given room object.
+ *
+ * @param {Room} room - The room object to be added.
+ * @return {void} This function does not return anything.
+ */
 const addRoom = (room: Room) => {
   emit('add', room)
 }
 
+/**
+ * Updates a room by emitting an 'edit' event with the given room object.
+ *
+ * @param {Room} room - The room object to be updated.
+ * @return {void} This function does not return anything.
+ */
 const updateRoom = (room: Room) => {
   emit('edit', room)
+}
+
+/**
+ * Emits a 'delete' event with the given room object.
+ *
+ * @param {Room} room - The room object to be deleted.
+ * @return {void} This function does not return anything.
+ */
+const deleteRoom = (room: Room) => {
+  emit('delete', room)
 }
 </script>
 
@@ -39,7 +61,13 @@ const updateRoom = (room: Room) => {
         <v-progress-circular indeterminate color="primary"></v-progress-circular>
       </div>
       <div v-else class="rooms-container">
-        <RoomCard v-for="room in rooms" :key="room.id" :room="room" @edit="updateRoom" />
+        <RoomCard
+          v-for="room in rooms"
+          :key="room.id"
+          :room="room"
+          @edit="updateRoom"
+          @delete="deleteRoom"
+        />
       </div>
     </v-card-text>
   </v-card>

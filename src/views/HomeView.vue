@@ -1,20 +1,16 @@
 <script setup lang="ts">
 import FloorCard from '@/components/FloorCard.vue'
-import type Room from '@/models/Room'
+import useFilters from '@/composables/useFilters'
 import useRoomStore from '@/stores/roomStore'
-import { computed, onMounted } from 'vue'
+import { onMounted } from 'vue'
 
 const store = useRoomStore()
+
+const { floorsAvailable, filteredRooms } = useFilters()
 
 onMounted(() => {
   store.fetchRooms()
 })
-
-const floors = computed(() => store.rooms.map((room: Room) => room.floor))
-
-const onFloorChange = (floor: number) => {
-  store.setSelectedFloor(floor)
-}
 </script>
 
 <template>
@@ -24,20 +20,20 @@ const onFloorChange = (floor: number) => {
       <v-col cols="12" md="4">
         <v-select
           v-model="store.selectedFloor"
-          :items="floors"
+          :items="floorsAvailable"
           label="Planta"
           class="mb-6"
           hide-details
           variant="outlined"
           dense
-          @change="onFloorChange"
+          @change="store.setSelectedFloor"
         ></v-select>
       </v-col>
     </v-row>
     <hr class="mb-6" />
     <FloorCard
       :loading="store.loading"
-      :rooms="store.rooms"
+      :rooms="filteredRooms"
       :floor="store.selectedFloor"
       @add="store.addRoom"
       @edit="store.updateRoom"

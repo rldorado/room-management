@@ -9,12 +9,16 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['edit'])
-
 const room = ref<Room>({ ...props.room })
 
+const emit = defineEmits(['edit', 'delete'])
+
 const editRoom = () => {
-  emit('edit', props.room)
+  emit('edit', room.value)
+}
+
+const deleteRoom = () => {
+  emit('delete', room.value)
 }
 </script>
 
@@ -48,6 +52,7 @@ const editRoom = () => {
     </v-card-text>
     <v-card-actions class="flex justify-end">
       <v-btn class="text-none" small @click="editRoom">Modificar</v-btn>
+      <v-btn class="text-none" small @click="deleteRoom">Eliminar</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -56,9 +61,5 @@ const editRoom = () => {
 .room-card {
   background-color: $blue-light;
   border-radius: $border-radius-container;
-}
-
-.v-input {
-  background-color: white;
 }
 </style>

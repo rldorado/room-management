@@ -1,4 +1,5 @@
 import axios from 'axios'
+import mock from './mock_db.json'
 
 const apiClient = axios.create({
   baseURL: 'https://apimocha.com/alvatross-rooms',
@@ -12,22 +13,7 @@ const apiClient = axios.create({
 const mockResponse = new Promise((resolve) => {
   setTimeout(() => {
     resolve({
-      data: [
-        {
-          id: 1,
-          name: 'Sala 1',
-          floor: 1,
-          capacity: 4,
-          occupancy: 2
-        },
-        {
-          id: 2,
-          name: 'Sala 2',
-          floor: 2,
-          capacity: 3,
-          occupancy: 1
-        }
-      ]
+      data: [...mock.rooms]
     })
   }, 2000)
 })
