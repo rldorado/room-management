@@ -4,8 +4,6 @@ import HomeView from './views/HomeView.vue'
 
 <template>
   <v-app>
-    <v-container>
-      <HomeView />
-    </v-container>
+    <HomeView />
   </v-app>
 </template>

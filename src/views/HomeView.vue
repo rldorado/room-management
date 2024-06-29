@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import RoomCard from '@/components/RoomCard.vue'
+import FloorCard from '@/components/FloorCard.vue'
 import type Room from '@/models/Room'
 import useRoomStore from '@/stores/roomStore'
 import { computed, onMounted } from 'vue'
@@ -18,27 +18,29 @@ const onFloorChange = (floor: number) => {
 </script>
 
 <template>
-  <v-select
-    v-model="store.selectedFloor"
-    :items="floors"
-    label="Planta"
-    class="mb-4"
-    @change="onFloorChange"
-  ></v-select>
-  <div class="d-flex justify-end mb-4">
-    <v-btn color="primary" class="bg-blue-600 text-white" @click="store.addRoom">
-      Añadir sala
-    </v-btn>
-  </div>
-  <div class="room-list">
-    <RoomCard v-for="room in store.rooms" :key="room.id" :room="room" @edit="store.updateRoom" />
-  </div>
+  <v-container fluid>
+    <h1 class="text-h4 font-weight-bold mb-6">Salas</h1>
+    <v-row>
+      <v-col cols="12" md="4">
+        <v-select
+          v-model="store.selectedFloor"
+          :items="floors"
+          label="Planta"
+          class="mb-6"
+          hide-details
+          variant="outlined"
+          dense
+          @change="onFloorChange"
+        ></v-select>
+      </v-col>
+    </v-row>
+    <hr class="mb-6" />
+    <FloorCard
+      :loading="store.loading"
+      :rooms="store.rooms"
+      :floor="store.selectedFloor"
+      @add="store.addRoom"
+      @edit="store.updateRoom"
+    />
+  </v-container>
 </template>
-
-<style scoped>
-.room-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-</style>

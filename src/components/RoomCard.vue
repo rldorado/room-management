@@ -19,33 +19,46 @@ const editRoom = () => {
 </script>
 
 <template>
-  <v-card class="pa-4">
-    <v-card-title>Sala planta {{ room.floor }}</v-card-title>
+  <v-card class="room-card pa-2" outlined>
+    <v-card-title class="text-subtitle-1 font-weight-bold pb-4">
+      Sala planta {{ room.floor }}
+    </v-card-title>
     <v-card-text>
-      <v-text-field v-model="room.capacity" label="Capacidad máxima" type="number"></v-text-field>
+      <label for="capacity" class="text-body-2 font-weight-bold">Capacidad máxima</label>
       <v-text-field
-        v-model="room.occupancy"
-        label="Ocupación"
+        id="capacity"
+        v-model="room.capacity"
         type="number"
-        append-icon="%"
+        dense
+        variant="outlined"
+        hide-details
+        class="mb-4"
+      ></v-text-field>
+      <label for="occupancy" class="text-body-2 font-weight-bold">Ocupación</label>
+      <v-text-field
+        id="occupancy"
+        v-model="room.occupancy"
+        type="number"
+        append-inner-icon="mdi-percent"
+        dense
+        variant="outlined"
+        hide-details
+        class="mb-2"
       ></v-text-field>
     </v-card-text>
-    <v-card-actions>
-      <v-btn @click="editRoom" class="bg-blue-600 text-white">Modificar</v-btn>
+    <v-card-actions class="flex justify-end">
+      <v-btn class="text-none" small @click="editRoom">Modificar</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
-<style scoped>
-.v-card {
-  width: 250px;
-  border-radius: 26px;
-  background-color: #f5f7fb;
+<style scoped lang="scss">
+.room-card {
+  background-color: $blue-light;
+  border-radius: $border-radius-container;
 }
-.v-text-field {
-  border-radius: 12px;
-}
-.v-btn {
-  border-radius: 12px;
+
+.v-input {
+  background-color: white;
 }
 </style>

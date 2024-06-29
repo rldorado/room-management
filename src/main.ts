@@ -4,9 +4,8 @@ import App from './App.vue'
 
 // Vuetify
 import Vuetify from './plugins/vuetify'
-
-// Tailwindcss
-import './index.css'
+// Icons
+import '@mdi/font/css/materialdesignicons.css'
 
 const app = createApp(App)
 

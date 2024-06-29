@@ -1,0 +1,19 @@
+// Variables
+
+$blue-dark: #2e344d;
+$blue-light: #f5f7fb;
+$border-radius-container: 26px;
+$border-radius-input: 12px;
+$border-radius-button: 12px;
+
+// Vuetify styles
+
+.v-btn {
+  border-radius: $border-radius-button;
+  background-color: $blue-dark;
+  color: white;
+}
+
+body {
+  font-family: 'Helvetica', sans-serif;
+}
