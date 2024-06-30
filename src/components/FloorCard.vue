@@ -56,7 +56,7 @@ const deleteRoom = (id: number) => {
 </script>
 
 <template>
-  <div class="bg-white border-2 border-gray-200 rounded-3xl p-4">
+  <div class="bg-white border-2 border-gray-500 rounded-3xl p-4">
     <div class="flex justify-between items-center mb-4">
       <h2 class="text-2xl font-bold">Planta {{ floor }}</h2>
       <button

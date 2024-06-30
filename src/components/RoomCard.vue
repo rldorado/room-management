@@ -61,7 +61,7 @@ const deleteRoom = () => {
 </script>
 
 <template>
-  <div class="bg-blue-light rounded-3xl p-4">
+  <div class="bg-blue-light rounded-3xl p-4 min-w-[300px] w-full md:w-auto">
     <h2 class="text-lg font-bold mb-4">Sala planta {{ room.floor }}</h2>
     <div class="mb-4">
       <label :for="`capacity-${room.id}`" class="block text-sm font-bold mb-1">
@@ -77,36 +77,32 @@ const deleteRoom = () => {
       <p v-if="errors.capacity" class="text-red-500 text-xs mt-1">
         {{ errors.capacity }}
       </p>
-      <div class="mb-4">
-        <label :for="`occupancy-${room.id}`" class="block text-sm font-bold mb-1">
-          Ocupación
-        </label>
-        <div class="relative">
-          <input
-            :id="`occupancy-${room.id}`"
-            v-model="room.occupancy"
-            type="number"
-            class="w-full p-2 border border-gray-300 rounded-lg pr-8"
-            :class="{ 'border-red-500': errors.occupancy }"
-          />
-          <span class="absolute right-2 top-2">%</span>
-        </div>
-        <p v-if="errors.occupancy" class="text-red-500 text-xs mt-1">
-          {{ errors.occupancy }}
-        </p>
+    </div>
+    <div class="mb-4">
+      <label :for="`occupancy-${room.id}`" class="block text-sm font-bold mb-1"> Ocupación </label>
+      <div class="relative">
+        <input
+          :id="`occupancy-${room.id}`"
+          v-model="room.occupancy"
+          type="number"
+          class="w-full p-2 border border-gray-300 rounded-lg pr-8"
+          :class="{ 'border-red-500': errors.occupancy }"
+        />
+        <span class="absolute right-2 top-2">%</span>
       </div>
+      <p v-if="errors.occupancy" class="text-red-500 text-xs mt-1">
+        {{ errors.occupancy }}
+      </p>
     </div>
     <div class="flex justify-end space-x-2">
       <button
-        class="bg-blue-dark text-white px-3 py-1 rounded-xl hover:bg-blue-800 text-sm"
-        small
+        class="bg-blue-dark text-white px-5 py-3 rounded-xl hover:bg-blue-800 text-sm"
         @click="editRoom"
       >
         Modificar
       </button>
       <button
-        class="bg-blue-dark text-white px-3 py-1 rounded-xl hover:bg-blue-800 text-sm"
-        small
+        class="bg-blue-dark text-white px-5 py-3 rounded-xl hover:bg-blue-800 text-sm"
         @click="deleteRoom"
       >
         Eliminar
