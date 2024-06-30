@@ -14,7 +14,6 @@ vi.mock('@/stores/roomStore', () => ({
   default: () => ({
     fetchRooms: vi.fn(),
     selectedFloor: 1,
-    setSelectedFloor: vi.fn(),
     loading: false
   })
 }))
@@ -39,6 +38,6 @@ describe('HomeView', () => {
   it('updates selectedFloor when select changes', async () => {
     const wrapper = mount(HomeView)
     await wrapper.find('select').setValue(2)
-    expect(wrapper.vm.store.setSelectedFloor).toHaveBeenCalledWith(2)
+    expect(wrapper.vm.store.selectedFloor).toBe(2)
   })
 })

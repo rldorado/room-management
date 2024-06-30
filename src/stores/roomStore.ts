@@ -31,10 +31,6 @@ const useRoomStore = defineStore('roomStore', () => {
     loading.value = false
   }
 
-  const setSelectedFloor = (floor: number) => {
-    selectedFloor.value = floor
-  }
-
   // CRUD operations
 
   const addRoom = () => {
@@ -85,7 +81,6 @@ const useRoomStore = defineStore('roomStore', () => {
     selectedFloor,
     loading,
     fetchRooms,
-    setSelectedFloor,
     addRoom,
     updateRoom,
     deleteRoom
