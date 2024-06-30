@@ -1,7 +1,7 @@
 import type Room from '@/models/Room'
 import { defineStore } from 'pinia'
 import roomsApi from '@/services'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const STORAGE_KEY = 'rooms'
 
@@ -19,19 +19,16 @@ const useRoomStore = defineStore('roomStore', () => {
     const cachedRooms = localStorage.getItem(STORAGE_KEY)
     if (cachedRooms) {
       rooms.value = JSON.parse(cachedRooms)
-      loading.value = false
-      return
+    } else {
+      try {
+        const response = await roomsApi.fetchRooms()
+        rooms.value = response.data
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(rooms.value))
+      } catch (error) {
+        console.error('Error fetching rooms:', error)
+      }
     }
-
-    // Fetch rooms when there's no rooms in local storage
-    try {
-      const response = await roomsApi.fetchRooms()
-      rooms.value = response.data
-    } catch (error) {
-      console.error('Error fetching rooms:', error)
-    } finally {
-      loading.value = false
-    }
+    loading.value = false
   }
 
   const setSelectedFloor = (floor: number) => {
@@ -42,7 +39,7 @@ const useRoomStore = defineStore('roomStore', () => {
 
   const addRoom = () => {
     const newRoom = {
-      id: rooms.value.length + 1,
+      id: Math.floor(Math.random() * 1000),
       name: `Sala ${selectedFloor.value}`,
       floor: selectedFloor.value,
       occupancy: 0,
@@ -73,6 +70,15 @@ const useRoomStore = defineStore('roomStore', () => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(rooms.value))
     }
   }
+
+  // Watch changes in rooms and update local storage
+  watch(
+    rooms,
+    (newRooms) => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newRooms))
+    },
+    { deep: true }
+  )
 
   return {
     rooms,

@@ -5,7 +5,6 @@ import useRoomStore from '@/stores/roomStore'
 import { onMounted } from 'vue'
 
 const store = useRoomStore()
-
 const { floorsAvailable, filteredRooms } = useFilters()
 
 onMounted(() => {
@@ -14,22 +13,20 @@ onMounted(() => {
 </script>
 
 <template>
-  <v-container fluid>
-    <h1 class="text-h4 font-weight-bold mb-6">Salas</h1>
-    <v-row>
-      <v-col cols="12" md="4">
-        <v-select
-          v-model="store.selectedFloor"
-          :items="floorsAvailable"
-          label="Planta"
-          class="mb-6"
-          hide-details
-          variant="outlined"
-          dense
-          @change="store.setSelectedFloor"
-        ></v-select>
-      </v-col>
-    </v-row>
+  <div class="container mx-auto px-4">
+    <h1 class="text-3xl font-bold mb-6">Salas</h1>
+    <div class="mb-6">
+      <label for="floor-select" class="block text-sm font-medium text-gray-700"> Planta </label>
+      <select
+        id="floor-select"
+        v-model="store.selectedFloor"
+        class="w-full md:w-1/3 p-2 border border-gray-300 rounded-lg"
+      >
+        <option v-for="floor in floorsAvailable" :key="floor" :value="floor">
+          {{ floor }}
+        </option>
+      </select>
+    </div>
     <hr class="mb-6" />
     <FloorCard
       :loading="store.loading"
@@ -37,6 +34,7 @@ onMounted(() => {
       :floor="store.selectedFloor"
       @add="store.addRoom"
       @edit="store.updateRoom"
+      @delete="store.deleteRoom"
     />
-  </v-container>
+  </div>
 </template>

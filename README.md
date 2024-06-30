@@ -1,61 +1,60 @@
-# room-management
+# Gestor de Salas (Room Management)
 
-This template should help get you started developing with Vue 3 in Vite.
+## Pasos para arrancar el proyecto
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+1. Clonar el repositorio:
 
 ```sh
+git clone <URL_DEL_REPOSITORIO>
+cd <NOMBRE_DEL_PROYECTO>
+```
+
+2. Instalar las dependencias
+
+```sh
+# Usando npm
+npm install
+# O bien pnpm
 pnpm install
 ```
 
-### Compile and Hot-Reload for Development
+3. Iniciar el servidor de desarrollo:
 
 ```sh
-pnpm dev
+# Usando npm
+npm run dev
+# O bien pnpm
+pnpm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## Explicación de las decisiones tomadas
 
-```sh
-pnpm build
-```
+- Vue 3 se eligió por su simplicidad y poder para construir aplicaciones frontend modernas.
+- Vite se utilizó para el bundling debido a su rapidez y configuración mínima.
+- Pinia se seleccionó como el gestor de estado por su integración nativa con Vue 3.
+- Tailwindcss se utilizó para asegurar una interfaz de usuario consistente y de alta calidad.
+- Axios se utilizó para manejar las solicitudes HTTP de manera sencilla.
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## Dificultades encontradas
 
-```sh
-pnpm test:unit
-```
+- Configuración inicial de Tailwindcss.
+- Manejo del estado reactivo y la actualización de los componentes con Pinia.
+- Implementación de filtros para capacidad y ocupación de salas.
+- Asegurar la consistencia del diseño requirió ajustes finos en los estilos CSS.
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+## Extras implementados
 
-```sh
-pnpm test:e2e:dev
-```
+- Tests unitarios mediante Vitest y tests de integración mediante Cypress.
+- Simulación de la conexión con un backend utilizando apimocha.
+- Funcionalidad para validar los datos de las salas.
+- Filtros para capacidad y ocupación de salas.
+- Aplicación responsive utilizando Tailwindcss.
+- Feedback mediante snackbars.
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
+### Recursos de diseño
 
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-pnpm build
-pnpm test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-pnpm lint
-```
+- **Colores**: azul oscuro (#2E344D) y azul claro (#F5F7FB).
+- **Border-radius**:
+  - Contenedores: 26px
+  - Inputs y botones: 12px
+- **Fuente**: Helvetica
