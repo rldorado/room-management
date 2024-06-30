@@ -20,12 +20,9 @@ const useRoomStore = defineStore('roomStore', () => {
     if (cachedRooms) {
       rooms.value = JSON.parse(cachedRooms)
     } else {
-      try {
-        const response = await roomsApi.fetchRooms()
-        rooms.value = response.data
+      rooms.value = await roomsApi.fetchRooms()
+      if (rooms.value.length) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(rooms.value))
-      } catch (error) {
-        console.error('Error fetching rooms:', error)
       }
     }
     loading.value = false

@@ -15,7 +15,7 @@ onMounted(() => {
 <template>
   <div class="container mx-auto px-4">
     <h1 class="text-3xl font-bold mb-6">Salas</h1>
-    <div class="mb-6">
+    <div class="mb-6" v-if="floorsAvailable">
       <label for="floor-select" class="block text-sm font-medium text-gray-700"> Planta </label>
       <select
         id="floor-select"
@@ -27,6 +27,7 @@ onMounted(() => {
         </option>
       </select>
     </div>
+    <div v-else>No floors available</div>
     <hr class="mb-6" />
     <FloorCard
       :loading="store.loading"

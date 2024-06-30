@@ -60,8 +60,9 @@ const deleteRoom = (id: number) => {
     <div class="flex justify-between items-center mb-4">
       <h2 class="text-2xl font-bold">Planta {{ floor }}</h2>
       <button
-        class="bg-blue-dark text-white px-4 py-2 rounded-xl hover:bg-blue-800"
+        class="bg-blue-dark text-white px-4 py-2 rounded-xl hover:bg-blue-800 disabled:bg-gray-400"
         @click="addRoom"
+        :disabled="loading"
       >
         Añadir sala
       </button>
@@ -69,7 +70,7 @@ const deleteRoom = (id: number) => {
     <div v-if="loading" class="flex justify-center items-center h-52">
       <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-900" />
     </div>
-    <div v-else class="flex flex-wrap gap-4">
+    <div v-else-if="rooms.length" class="flex flex-wrap gap-4">
       <RoomCard
         v-for="room in rooms"
         :key="room.id"
@@ -78,6 +79,7 @@ const deleteRoom = (id: number) => {
         @delete="deleteRoom"
       />
     </div>
+    <div v-else>No hay salas disponibles</div>
     <transition name="fade">
       <div
         v-if="snackbar"

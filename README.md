@@ -44,6 +44,7 @@ pnpm run dev
 
 ## Extras implementados
 
+- Caché implementado para mejora de la performance (localStorage).
 - Tests unitarios mediante Vitest y tests de integración mediante Cypress.
 - Simulación de la conexión con un backend utilizando apimocha.
 - Funcionalidad para validar los datos de las salas.

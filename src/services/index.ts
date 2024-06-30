@@ -1,5 +1,5 @@
+import type Room from '@/models/Room'
 import axios from 'axios'
-import mock from './mock_db.json'
 
 const apiClient = axios.create({
   baseURL: 'https://apimocha.com/alvatross-rooms',
@@ -9,19 +9,36 @@ const apiClient = axios.create({
   }
 })
 
-// Create a Promise that will resolve with a mock response instead the apiClient one of Axios
-const mockResponse = new Promise((resolve) => {
-  setTimeout(() => {
-    resolve({
-      data: [...mock.rooms]
+// Parse data from server
+const createRoomsFromServer = (data: any): Room[] => {
+  const rooms: Room[] = []
+  if (Array.isArray(data)) {
+    data.forEach((room: any) => {
+      rooms.push({
+        id: room.id,
+        floor: room.floor,
+        capacity: room.capacity,
+        occupancy: room.occupancy
+      })
     })
-  }, 2000)
-})
+  } else if (Array.isArray(data.rooms)) {
+    data.rooms.forEach((room: any) => {
+      rooms.push({
+        id: room.id,
+        floor: room.floor,
+        capacity: room.capacity,
+        occupancy: room.occupancy
+      })
+    })
+  }
+  return rooms
+}
 
 export default {
-  async fetchRooms() {
+  async fetchRooms(): Promise<Room[]> {
     try {
-      return await mockResponse
+      const { data } = await apiClient.get('/rooms')
+      return createRoomsFromServer(data)
     } catch (error) {
       console.error('Error fetching rooms:', error)
       throw error

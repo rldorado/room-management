@@ -7,11 +7,11 @@ export const useFilters = () => {
 
   // Get unique floors from all rooms
   const floorsAvailable = computed(() => {
-    return Array.from(new Set(store.rooms.map((room: Room) => room.floor)))
+    return Array.from(new Set(store.rooms.map((room: Room) => room.floor))) || []
   })
 
   const filteredRooms = computed(() => {
-    return store.rooms.filter((room: Room) => room.floor === store.selectedFloor)
+    return store.rooms.filter((room: Room) => room.floor === store.selectedFloor) || []
   })
 
   return {
